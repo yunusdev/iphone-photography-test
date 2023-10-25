@@ -57,7 +57,7 @@ class User extends Authenticatable
      */
     public function lessons(): BelongsToMany
     {
-        return $this->belongsToMany(Lesson::class)->withPivot('watched');
+        return $this->belongsToMany(Lesson::class);
     }
 
     /**
@@ -74,6 +74,14 @@ class User extends Authenticatable
     public function watchedCount(): int
     {
         return $this->watched()->count();
+    }
+
+    /**
+     * The comments count that belong to the user.
+     */
+    public function commentsCount(): int
+    {
+        return $this->comments()->count();
     }
 }
 

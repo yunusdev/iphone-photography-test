@@ -2,7 +2,9 @@
 
 namespace Tests;
 
+use App\Events\CommentWritten;
 use App\Events\LessonWatched;
+use App\Models\Comment;
 use App\Models\Lesson;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -25,5 +27,22 @@ abstract class TestCase extends BaseTestCase
             event(new LessonWatched($lesson, $user));
         });
         return $lessons->last();
+    }
+
+    /**
+     * @param $user
+     * @param int $number - numbers of Comment to write
+     * @return mixed
+     */
+    public function createComments($user, int $number = 1): mixed
+    {
+        $lastComment = null;
+
+        for ($x = 0; $x < $number; $x++) {
+            $lastComment = Comment::factory()->create(['user_id' => $user->id]);
+            event(new CommentWritten($lastComment));
+        }
+
+        return $lastComment;
     }
 }

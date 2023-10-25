@@ -59,7 +59,7 @@ class LessonWatchedEventTest extends TestCase
         });
     }
 
-    public function test_that_lesson_watched_event_dispatched_times_when_multiple_lessons_are_watched(): void
+    public function test_that_lesson_watched_event_is_dispatched_the_right_number_of_times_when_multiple_lessons_are_watched(): void
     {
         Event::fake([LessonWatched::class]);
 
@@ -82,36 +82,37 @@ class LessonWatchedEventTest extends TestCase
 
 
     /**
-     * @dataProvider lessonsArray
+     * @dataProvider lessonsData
      */
     public function test_that_achievement_unlocked_event_is_dispatched_with_correct_payload_after_lessons_achievements_are_unlocked($eventName, $lessonsNum, $eventDispatchNum): void
     {
         Event::fake([AchievementUnlocked::class]);
-        $user = User::factory()->create();
 
+        $user = User::factory()->create();
         $this->watchLessons($user, $lessonsNum);
+
         Event::assertDispatched(function (AchievementUnlocked $event) use ($eventName, $user): bool {
             return $event->achievement_name === $eventName && $event->user->id === $user->id;
         });
     }
 
     /**
-     * @dataProvider lessonsArray
+     * @dataProvider lessonsData
      */
     public function test_that_achievement_unlocked_event_is_dispatched_the_right_number_of_times_after_lessons_achievements_are_unlocked($eventName, $lessonsNum, $eventDispatchNum): void
     {
         Event::fake([AchievementUnlocked::class]);
-        $user = User::factory()->create();
 
+        $user = User::factory()->create();
         $this->watchLessons($user, $lessonsNum);
 
         Event::assertDispatchedTimes( AchievementUnlocked::class, $eventDispatchNum);
     }
 
     /**
-     * Data for testing if AchievementUnlocked event is dispatched when achievements are unlocked and also if the event is dispatched the number of required times
-     */
-    public function lessonsArray() : array {
+     * Data provider for testing if AchievementUnlocked event is dispatched when lessons achievements are unlocked and also if the event is dispatched the number of required times
+    */
+    public function lessonsData() : array {
         return [
             ['First Lesson Watched', 1, 1],
             ['5 Lessons Watched', 5, 2],
