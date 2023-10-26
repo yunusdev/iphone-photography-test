@@ -71,6 +71,18 @@ class UserModelTest extends TestCase
         $this->assertEquals($achievementName, $user->lastCommentAchievement()?->name);
     }
 
+    /**
+     * @dataProvider unlockedAchievementsData
+     */
+    public function test_can_get_user_unlocked_achievements($lessonNum, $commentsNum, $unlockedAchievements): void
+    {
+        $user = User::factory()->create();
+        $this->watchLessons($user, $lessonNum);
+        $this->createComments($user, $commentsNum);
+
+        $this->assertEqualsCanonicalizing($unlockedAchievements, $user->unlockedUserAchievements());
+    }
+
     public function lessonsWatchedData(): array {
         return [
             [1],
@@ -110,6 +122,21 @@ class UserModelTest extends TestCase
             [5, '5 Comments Written'],
             [7, '5 Comments Written'],
             [1000, '20 Comments Written'],
+        ];
+    }
+
+    public function unlockedAchievementsData(): array {
+        return [
+            [0, 0, []],
+            [1, 0, ['First Lesson Watched']],
+            [0, 1, ['First Comment Written']],
+            [1, 1, ['First Lesson Watched', 'First Comment Written']],
+            [5, 4, ['First Lesson Watched', '5 Lessons Watched', 'First Comment Written', '3 Comments Written']],
+            [12, 7, ['First Lesson Watched', '5 Lessons Watched', '10 Lessons Watched', 'First Comment Written', '3 Comments Written', '5 Comments Written']],
+            [25, 10, ['First Lesson Watched', '5 Lessons Watched', '10 Lessons Watched', '25 Lessons Watched', 'First Comment Written', '3 Comments Written', '5 Comments Written', '10 Comments Written']],
+            [30, 15, ['First Lesson Watched', '5 Lessons Watched', '10 Lessons Watched', '25 Lessons Watched', 'First Comment Written', '3 Comments Written', '5 Comments Written', '10 Comments Written']],
+            [50, 20, ['First Lesson Watched', '5 Lessons Watched', '10 Lessons Watched', '25 Lessons Watched', '50 Lessons Watched', 'First Comment Written', '3 Comments Written', '5 Comments Written', '10 Comments Written', '20 Comments Written']],
+            [1000, 1000, ['First Lesson Watched', '5 Lessons Watched', '10 Lessons Watched', '25 Lessons Watched', '50 Lessons Watched', 'First Comment Written', '3 Comments Written', '5 Comments Written', '10 Comments Written', '20 Comments Written']],
         ];
     }
 
