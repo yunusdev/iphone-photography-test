@@ -97,6 +97,18 @@ class AchievementUnlockedEventTest extends TestCase
         Event::assertDispatchedTimes( BadgeUnlocked::class, $badgeDispatchedNum);
     }
 
+    /**
+     * @dataProvider badgesArray
+     */
+    public function test_user_achievement_counts_after_achievement_unlocked_events_is_dispatched($badgeName, $lessonsNum, $commentNum, $badgeDispatchedNum, $achievementsCount): void
+    {
+        $user = User::factory()->create();
+        $this->createComments($user, $commentNum);
+        $this->watchLessons($user, $lessonsNum);
+
+        $this->assertEquals($achievementsCount, $user->achievementsCount());
+    }
+
     public function badgesCommentsArray() : array{
 
         return [
@@ -119,17 +131,17 @@ class AchievementUnlockedEventTest extends TestCase
     public function badgesArray() : array{
 
         return [
-            ['Intermediate', 0, 10, 1],
-            ['Intermediate', 5, 3, 1],
-            ['Intermediate', 2, 10, 1],
+            ['Intermediate', 0, 10, 1, 4],
+            ['Intermediate', 5, 3, 1, 4],
+            ['Intermediate', 2, 10, 1, 5],
 
-            ['Advanced', 25, 10, 2],
-            ['Advanced', 27, 13, 2],
-            ['Advanced', 50, 13, 2],
+            ['Advanced', 25, 10, 2, 8],
+            ['Advanced', 27, 13, 2, 8],
+            ['Advanced', 50, 13, 2, 9],
 
-            ['Master', 50, 20, 3],
-            ['Master', 60, 50, 3],
-            ['Master', 500, 500, 3],
+            ['Master', 50, 20, 3, 10],
+            ['Master', 60, 50, 3, 10],
+            ['Master', 500, 500, 3, 10],
         ];
 
     }
