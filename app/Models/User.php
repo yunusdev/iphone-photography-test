@@ -175,7 +175,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Remaining achievements to unlock nect badge
+     * Remaining achievements to unlock next badge
      * @return int
      */
     public function remainingAchievementsToUnlockNextBadge(): int
