@@ -73,22 +73,22 @@ class CommentWrittenEventTest extends TestCase
     /**
      * @dataProvider commentsData
      */
-    public function test_that_achievement_unlocked_event_is_dispatched_with_correct_payload_after_comments_achievements_are_unlocked($eventName, $commentNum, $eventDispatchNum): void
+    public function test_that_achievement_unlocked_event_is_dispatched_with_correct_payload_after_comments_achievements_are_unlocked($achievementName, $commentNum, $eventDispatchNum): void
     {
         Event::fake([AchievementUnlocked::class]);
 
         $user = User::factory()->create();
         $this->createComments($user, $commentNum);
 
-        Event::assertDispatched(function (AchievementUnlocked $event) use ($eventName, $user): bool {
-            return $event->achievement_name === $eventName && $event->user->id === $user->id;
+        Event::assertDispatched(function (AchievementUnlocked $event) use ($achievementName, $user): bool {
+            return $event->achievement_name === $achievementName && $event->user->id === $user->id;
         });
     }
 
     /**
      * @dataProvider commentsData
      */
-    public function test_that_achievement_unlocked_event_is_dispatched_the_right_number_of_times_after_lessons_achievements_are_unlocked($eventName, $commentNum, $eventDispatchNum): void
+    public function test_that_achievement_unlocked_events_are_dispatched_the_right_number_of_times_after_lessons_achievements_are_unlocked($achievementName, $commentNum, $eventDispatchNum): void
     {
         Event::fake([AchievementUnlocked::class]);
 
