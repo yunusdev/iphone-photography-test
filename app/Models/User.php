@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\BadgeUnlocked;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,6 +45,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    # Adding Beginner Badge to User on created
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($user): void {
+            event(new BadgeUnlocked('Beginner', $user));
+        });
+    }
 
     /**
      * The comments that belong to the user.

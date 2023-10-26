@@ -131,17 +131,17 @@ class AchievementUnlockedEventTest extends TestCase
     public function badgesArray() : array{
 
         return [
-            ['Intermediate', 0, 10, 1, 4],
-            ['Intermediate', 5, 3, 1, 4],
-            ['Intermediate', 2, 10, 1, 5],
+            ['Intermediate', 0, 10, 2, 4],
+            ['Intermediate', 5, 3, 2, 4],
+            ['Intermediate', 2, 10, 2, 5],
 
-            ['Advanced', 25, 10, 2, 8],
-            ['Advanced', 27, 13, 2, 8],
-            ['Advanced', 50, 13, 2, 9],
+            ['Advanced', 25, 10, 3, 8],
+            ['Advanced', 27, 13, 3, 8],
+            ['Advanced', 50, 13, 3, 9],
 
-            ['Master', 50, 20, 3, 10],
-            ['Master', 60, 50, 3, 10],
-            ['Master', 500, 500, 3, 10],
+            ['Master', 50, 20, 4, 10],
+            ['Master', 60, 50, 4, 10],
+            ['Master', 500, 500, 4, 10],
         ];
 
     }

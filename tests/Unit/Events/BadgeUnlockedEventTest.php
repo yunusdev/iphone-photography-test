@@ -11,6 +11,26 @@ use Tests\TestCase;
 class BadgeUnlockedEventTest extends TestCase
 {
 
+    public function test_that_badge_unlocked_beginner_event_is_dispatched_when_user_is_created(){
+
+        Event::fake([BadgeUnlocked::class]);
+
+        $user = User::factory()->create();
+        $badgeName = 'Beginner';
+
+        Event::assertDispatched(function (BadgeUnlocked $event) use ($badgeName, $user): bool {
+            return $event->badge_name === $badgeName && $event->user->id === $user->id;
+        });
+    }
+
+    public function test_user_has_beginner_badge_after_creation(){
+
+        $user = User::factory()->create();
+
+        $this->assertEquals('Beginner', $user->currentBadge()->name);
+
+    }
+
     public function test_badge_unlocked_event_successfully_dispatched(): void
     {
         Event::fake([BadgeUnlocked::class]);
@@ -42,7 +62,7 @@ class BadgeUnlockedEventTest extends TestCase
         $user = User::factory()->create();
         Event::dispatch(new BadgeUnlocked('InvalidBadgeName', $user));
 
-        $this->assertEquals(0, $user->badges()->count());
+        $this->assertEquals(1, $user->badges()->count());
     }
 
     /**
