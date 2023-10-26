@@ -108,5 +108,13 @@ class User extends Authenticatable
     {
         return $this->morphedByMany(Badge::class, 'scorable')->withTimestamps();
     }
+
+    /**
+     * Current User badge
+     */
+    public function currentBadge()
+    {
+        return $this->badges()->orderBy('number', 'desc')->first();
+    }
 }
 
