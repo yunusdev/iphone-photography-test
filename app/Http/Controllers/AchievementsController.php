@@ -10,15 +10,14 @@ class AchievementsController extends Controller
 {
     public function index(User $user): JsonResponse
     {
-
-        $unlockedAchievements = $user->achievements()->pluck('name')->toArray();
+        $nextBadge = $user->nextUserBadge();
 
         return response()->json([
-            'unlocked_achievements' => [],
-            'next_available_achievements' => [],
-            'current_badge' => '',
-            'next_badge' => '',
-            'remaing_to_unlock_next_badge' => 0
+            'unlocked_achievements' => $user->unlockedUserAchievements(),
+            'next_available_achievements' => $user->nextAvailableAchievements(),
+            'current_badge' => $user->currentBadge()->name,
+            'next_badge' => $nextBadge ? $nextBadge->name : '',
+            'remaining_to_unlock_next_badge' => $user->remainingAchievementsToUnlockNextBadge()
         ]);
     }
 }

@@ -153,5 +153,71 @@ class User extends Authenticatable
     {
         return $this->lastAchievement(Achievement::LESSON);
     }
+
+    /**
+     * Unlocked user achievements
+     * @return array
+     */
+    public function unlockedUserAchievements(): array
+    {
+        return $this->achievements()->pluck('name')->toArray();
+    }
+
+    /**
+     * Unlocked user achievements
+     * @return Model|null
+     */
+    public function nextUserBadge(): Model|null
+    {
+        $currentBadge = $this->currentBadge();
+
+        return Badge::getNextBadge($currentBadge->number);
+    }
+
+    /**
+     * Remaining achievements to unlock nect badge
+     * @return int
+     */
+    public function remainingAchievementsToUnlockNextBadge(): int
+    {
+        $nextUserBadge = $this->nextUserBadge();
+        if ($nextUserBadge === null) return 0;
+
+        $achievementCount = $this->achievementsCount();
+        return $nextUserBadge->number - $achievementCount;
+    }
+
+
+    /**
+     * Next available user achievements
+     * @return array
+     */
+    public function nextAvailableAchievements(): array
+    {
+        $lastLessonAchievement = $this->lastLessonAchievement();
+        $lastCommentAchievement = $this->lastCommentAchievement();
+
+        $nextLessonAchievement = User::getNextAchievement($lastLessonAchievement, Achievement::LESSON);
+        $nextCommentAchievement = User::getNextAchievement($lastCommentAchievement, Achievement::COMMENT);
+
+        $nextAchievements = [];
+        if ($nextLessonAchievement) array_push($nextAchievements, $nextLessonAchievement->name);
+        if ($nextCommentAchievement) array_push($nextAchievements, $nextCommentAchievement->name);
+
+        return $nextAchievements;
+    }
+
+    /**
+     * @param Achievement|null $achievement
+     * @param string $group
+     * @return Builder|Model|null
+     */
+    public static function getNextAchievement(Achievement|null $achievement, string $group): Builder|Model|null
+    {
+        $number = $achievement ? $achievement->number : 0;
+        return Achievement::getNextAchievement($group, $number);
+    }
+
+
 }
 
