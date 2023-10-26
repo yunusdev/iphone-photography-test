@@ -48,6 +48,26 @@ class AchievementModelTest extends TestCase
         $this->assertEquals($achievement->name, $eventName);
     }
 
+    /**
+     * @dataProvider getNextAchievementLessonData
+     */
+    public function test_can_get_next_lessons_achievements_with_number($lessonsNum, $nextAchievementName): void
+    {
+        $achievement = Achievement::getNextAchievement(Achievement::LESSON, $lessonsNum);
+
+        $this->assertEquals($nextAchievementName,  $achievement?->name);
+    }
+
+    /**
+     * @dataProvider getNextAchievementCommentData
+     */
+    public function test_can_get_next_comments_achievements_with_number($commentsNum, $nextAchievementName): void
+    {
+        $achievement = Achievement::getNextAchievement(Achievement::COMMENT, $commentsNum);
+
+        $this->assertEquals($nextAchievementName,  $achievement?->name);
+    }
+
     public function lessonsData() : array {
         return [
             ['First Lesson Watched', 1],
@@ -65,6 +85,38 @@ class AchievementModelTest extends TestCase
             ['5 Comments Written', 5],
             ['10 Comments Written', 10],
             ['20 Comments Written', 20],
+        ];
+    }
+
+    public function getNextAchievementLessonData(): array {
+        return [
+            [0, 'First Lesson Watched'],
+            [1, '5 Lessons Watched'],
+            [3, '5 Lessons Watched'],
+            [5, '10 Lessons Watched'],
+            [7, '10 Lessons Watched'],
+            [10, '25 Lessons Watched'],
+            [20, '25 Lessons Watched'],
+            [25, '50 Lessons Watched'],
+            [30, '50 Lessons Watched'],
+            [50, null],
+            [1000, null],
+        ];
+    }
+
+    public function getNextAchievementCommentData(): array {
+        return [
+            [0, 'First Comment Written'],
+            [1, '3 Comments Written'],
+            [2, '3 Comments Written'],
+            [3, '5 Comments Written'],
+            [4, '5 Comments Written'],
+            [5, '10 Comments Written'],
+            [8, '10 Comments Written'],
+            [10, '20 Comments Written'],
+            [19, '20 Comments Written'],
+            [50, null],
+            [1000, null],
         ];
     }
 
