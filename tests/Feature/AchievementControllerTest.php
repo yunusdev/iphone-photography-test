@@ -95,11 +95,11 @@ class AchievementControllerTest extends TestCase
                         "First Comment Written",
                         "3 Comments Written",
                         "5 Comments Written",
-                        "10 Comment Written"
+                        "10 Comments Written"
                     ],
                     "next_available_achievements" => [
                         "10 Lessons Watched",
-                        "20 Comment Written"
+                        "20 Comments Written"
                     ],
                     "current_badge" => "Intermediate",
                     "next_badge" => "Advanced",
@@ -117,11 +117,11 @@ class AchievementControllerTest extends TestCase
                         "First Comment Written",
                         "3 Comments Written",
                         "5 Comments Written",
-                        "10 Comment Written"
+                        "10 Comments Written"
                     ],
                     "next_available_achievements" => [
                         "50 Lessons Watched",
-                        "20 Comment Written"
+                        "20 Comments Written"
                     ],
                     "current_badge" => "Advanced",
                     "next_badge" => "Master",
@@ -140,10 +140,10 @@ class AchievementControllerTest extends TestCase
                         "First Comment Written",
                         "3 Comments Written",
                         "5 Comments Written",
-                        "10 Comment Written"
+                        "10 Comments Written"
                     ],
                     "next_available_achievements" => [
-                        "20 Comment Written"
+                        "20 Comments Written"
                     ],
                     "current_badge" => "Advanced",
                     "next_badge" => "Master",
@@ -163,8 +163,8 @@ class AchievementControllerTest extends TestCase
                         "First Comment Written",
                         "3 Comments Written",
                         "5 Comments Written",
-                        "10 Comment Written",
-                        "20 Comment Written"
+                        "10 Comments Written",
+                        "20 Comments Written"
                     ],
                     "next_available_achievements" => [],
                     "current_badge" => "Master",

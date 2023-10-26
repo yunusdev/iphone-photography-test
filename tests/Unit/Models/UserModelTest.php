@@ -49,6 +49,28 @@ class UserModelTest extends TestCase
         $this->assertEquals(0, $user->commentsCount());
     }
 
+    /**
+     * @dataProvider lessonsData
+     */
+    public function test_can_get_user_last_lesson_achievement($lessonNum, $achievementName): void
+    {
+        $user = User::factory()->create();
+        $this->watchLessons($user, $lessonNum);
+
+        $this->assertEquals($achievementName, $user->lastLessonAchievement()?->name);
+    }
+
+    /**
+     * @dataProvider commentsData
+     */
+    public function test_can_get_user_last_comment_achievement($commentsNum, $achievementName): void
+    {
+        $user = User::factory()->create();
+        $this->createComments($user, $commentsNum);
+
+        $this->assertEquals($achievementName, $user->lastCommentAchievement()?->name);
+    }
+
     public function lessonsWatchedData(): array {
         return [
             [1],
@@ -66,6 +88,28 @@ class UserModelTest extends TestCase
             [5],
             [10],
             [20],
+        ];
+    }
+
+    public function lessonsData(): array {
+        return [
+            [0, null],
+            [1, 'First Lesson Watched'],
+            [5, '5 Lessons Watched'],
+            [10, '10 Lessons Watched'],
+            [30, '25 Lessons Watched'],
+            [1000, '50 Lessons Watched'],
+        ];
+    }
+
+    public function commentsData(): array {
+        return [
+            [0, null],
+            [1, 'First Comment Written'],
+            [4, '3 Comments Written'],
+            [5, '5 Comments Written'],
+            [7, '5 Comments Written'],
+            [1000, '20 Comments Written'],
         ];
     }
 

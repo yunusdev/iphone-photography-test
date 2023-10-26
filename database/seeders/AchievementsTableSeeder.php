@@ -22,8 +22,8 @@ class AchievementsTableSeeder extends Seeder
             ['name' => 'First Comment Written', 'group' => Achievement::COMMENT, 'number' => 1],
             ['name' => '3 Comments Written', 'group' => Achievement::COMMENT, 'number' => 3],
             ['name' => '5 Comments Written', 'group' => Achievement::COMMENT, 'number' => 5],
-            ['name' => '10 Comment Written', 'group' => Achievement::COMMENT, 'number' => 10],
-            ['name' => '20 Comment Written', 'group' => Achievement::COMMENT, 'number' => 20],
+            ['name' => '10 Comments Written', 'group' => Achievement::COMMENT, 'number' => 10],
+            ['name' => '20 Comments Written', 'group' => Achievement::COMMENT, 'number' => 20],
         ];
         foreach ($achievements as $achievement){
             Achievement::query()->updateOrCreate(['name' => $achievement['name']], $achievement);

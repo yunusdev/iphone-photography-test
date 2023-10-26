@@ -106,8 +106,8 @@ class CommentWrittenEventTest extends TestCase
             ['First Comment Written', 1, 1],
             ['3 Comments Written', 3, 2],
             ['5 Comments Written', 5, 3],
-            ['10 Comment Written', 10, 4],
-            ['20 Comment Written', 20, 5],
+            ['10 Comments Written', 10, 4],
+            ['20 Comments Written', 20, 5],
         ];
     }
 

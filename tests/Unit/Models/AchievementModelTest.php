@@ -63,8 +63,8 @@ class AchievementModelTest extends TestCase
             ['First Comment Written', 1],
             ['3 Comments Written', 3],
             ['5 Comments Written', 5],
-            ['10 Comment Written', 10],
-            ['20 Comment Written', 20],
+            ['10 Comments Written', 10],
+            ['20 Comments Written', 20],
         ];
     }
 
