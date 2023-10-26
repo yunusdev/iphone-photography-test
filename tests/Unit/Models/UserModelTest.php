@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use App\Events\AchievementUnlocked;
 use App\Listeners\AchievementUnlockedListener;
+use App\Models\Achievement;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -129,6 +130,28 @@ class UserModelTest extends TestCase
         $this->createComments($user, $commentsNum);
 
         $this->assertEquals($nextAvailableAchievements,  $user->nextAvailableAchievements());
+    }
+
+    /**
+     * @dataProvider getNextAchievementLessonData
+     */
+    public function test_can_get_next_lessons_achievements($achievementName, $nextAchievementName): void
+    {
+        $currentAchievement = Achievement::query()->where(['name' => $achievementName])->first();
+        $achievement = User::getNextAchievement($currentAchievement, Achievement::LESSON);
+
+        $this->assertEquals($nextAchievementName,  $achievement?->name);
+    }
+
+    /**
+     * @dataProvider getNextAchievementCommentData
+     */
+    public function test_can_get_next_comments_achievements($achievementName, $nextAchievementName): void
+    {
+        $currentAchievement = Achievement::query()->where(['name' => $achievementName])->first();
+        $achievement = User::getNextAchievement($currentAchievement, Achievement::COMMENT);
+
+        $this->assertEquals($nextAchievementName,  $achievement?->name);
     }
 
     public function lessonsWatchedData(): array {
@@ -257,6 +280,28 @@ class UserModelTest extends TestCase
             [30, 15, 2, ['50 Lessons Watched', '20 Comments Written']],
             [50, 20, 0, []],
             [1000, 1000, 0, []],
+        ];
+    }
+
+    public function getNextAchievementLessonData(): array {
+        return [
+            [null, 'First Lesson Watched'],
+            ['First Lesson Watched', '5 Lessons Watched'],
+            ['5 Lessons Watched', '10 Lessons Watched'],
+            ['10 Lessons Watched', '25 Lessons Watched'],
+            ['25 Lessons Watched', '50 Lessons Watched'],
+            ['50 Lessons Watched', null],
+        ];
+    }
+
+    public function getNextAchievementCommentData(): array {
+        return [
+            [null, 'First Comment Written'],
+            ['First Lesson Watched', '3 Comments Written'],
+            ['3 Comments Written', '5 Comments Written'],
+            ['5 Comments Written', '10 Comments Written'],
+            ['10 Comments Written', '20 Comments Written'],
+            ['20 Comments Written', null],
         ];
     }
 }

@@ -208,11 +208,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @param Achievement|null $achievement
+     * @param Builder|Model|null $achievement
      * @param string $group
      * @return Builder|Model|null
      */
-    public static function getNextAchievement(Achievement|null $achievement, string $group): Builder|Model|null
+    public static function getNextAchievement(Builder|Model|null $achievement, string $group): Builder|Model|null
     {
         $number = $achievement ? $achievement->number : 0;
         return Achievement::getNextAchievement($group, $number);
