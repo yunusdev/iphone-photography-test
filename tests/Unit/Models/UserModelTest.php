@@ -135,7 +135,7 @@ class UserModelTest extends TestCase
     /**
      * @dataProvider getNextAchievementLessonData
      */
-    public function test_can_get_next_lessons_achievements($achievementName, $nextAchievementName): void
+    public function test_can_get_next_lessons_achievement($achievementName, $nextAchievementName): void
     {
         $currentAchievement = Achievement::query()->where(['name' => $achievementName])->first();
         $achievement = User::getNextAchievement($currentAchievement, Achievement::LESSON);
@@ -146,7 +146,7 @@ class UserModelTest extends TestCase
     /**
      * @dataProvider getNextAchievementCommentData
      */
-    public function test_can_get_next_comments_achievements($achievementName, $nextAchievementName): void
+    public function test_can_get_next_comments_achievement($achievementName, $nextAchievementName): void
     {
         $currentAchievement = Achievement::query()->where(['name' => $achievementName])->first();
         $achievement = User::getNextAchievement($currentAchievement, Achievement::COMMENT);
@@ -196,6 +196,9 @@ class UserModelTest extends TestCase
         ];
     }
 
+    /**
+     * This data is used to test unlockedUserAchievements, currentBadge and nextUserBadge functions
+     */
     public function userTestingData(): array {
         return [
             [0, 0, [], 'Beginner', 'Intermediate'],
@@ -268,6 +271,9 @@ class UserModelTest extends TestCase
         ];
     }
 
+    /**
+     * This data is used to test remainingAchievementsToUnlockNextBadge and nextAvailableAchievements functions
+     */
     public function userTestingData2(): array {
         return [
             [0, 0, 4, ['First Lesson Watched', 'First Comment Written']],

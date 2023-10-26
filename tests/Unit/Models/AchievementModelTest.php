@@ -51,7 +51,7 @@ class AchievementModelTest extends TestCase
     /**
      * @dataProvider getNextAchievementLessonData
      */
-    public function test_can_get_next_lessons_achievements_with_number($lessonsNum, $nextAchievementName): void
+    public function test_can_get_next_lessons_achievement_with_number($lessonsNum, $nextAchievementName): void
     {
         $achievement = Achievement::getNextAchievement(Achievement::LESSON, $lessonsNum);
 
@@ -61,7 +61,7 @@ class AchievementModelTest extends TestCase
     /**
      * @dataProvider getNextAchievementCommentData
      */
-    public function test_can_get_next_comments_achievements_with_number($commentsNum, $nextAchievementName): void
+    public function test_can_get_next_comments_achievement_with_number($commentsNum, $nextAchievementName): void
     {
         $achievement = Achievement::getNextAchievement(Achievement::COMMENT, $commentsNum);
 
