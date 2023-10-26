@@ -26,6 +26,19 @@ class Achievement extends Model
         return self::query()->where(['group' => $group, 'number' => $number])->first();
     }
 
+    /**
+     * @param string $group
+     * @param int $number
+     * @return Builder|Model|null
+     */
+    public static function getNextAchievement(string $group, int $number): Builder|Model|null
+    {
+        return self::query()->where(['group' => $group])
+            ->where('number', '>', $number)
+            ->orderBy('number')
+            ->first();
+    }
+
 
 
 }
