@@ -67,7 +67,6 @@ class AchievementControllerTest extends TestCase
                     "remaining_to_unlock_next_badge" => 2
                 ]
             ],
-
             [
                 5, 3,
                 [
@@ -84,6 +83,25 @@ class AchievementControllerTest extends TestCase
                     "current_badge" => "Intermediate",
                     "next_badge" => "Advanced",
                     "remaining_to_unlock_next_badge" => 4
+                ]
+            ],
+            [
+                6, 7,
+                [
+                    "unlocked_achievements" => [
+                        "First Lesson Watched",
+                        "5 Lessons Watched",
+                        "First Comment Written",
+                        "3 Comments Written",
+                        "5 Comments Written"
+                    ],
+                    "next_available_achievements" => [
+                        "10 Lessons Watched",
+                        "10 Comments Written"
+                    ],
+                    "current_badge" => "Intermediate",
+                    "next_badge" => "Advanced",
+                    "remaining_to_unlock_next_badge" => 3
                 ]
             ],
             [
@@ -171,9 +189,41 @@ class AchievementControllerTest extends TestCase
                     "next_badge" => "",
                     "remaining_to_unlock_next_badge" => 0
                 ],
+            ],
+            [
+                1000, 1000,
+                [
+                    "unlocked_achievements" => [
+                        "First Lesson Watched",
+                        "5 Lessons Watched",
+                        "10 Lessons Watched",
+                        "25 Lessons Watched",
+                        "50 Lessons Watched",
+
+                        "First Comment Written",
+                        "3 Comments Written",
+                        "5 Comments Written",
+                        "10 Comments Written",
+                        "20 Comments Written"
+                    ],
+                    "next_available_achievements" => [],
+                    "current_badge" => "Master",
+                    "next_badge" => "",
+                    "remaining_to_unlock_next_badge" => 0
+                ],
             ]
         ];
 
+    }
+
+    /**
+     *TEST for new user
+     * @return void
+     */
+    public function test_for_invalid_user_id()
+    {
+        $this->json('GET', "/users/99999/achievements")
+            ->assertStatus(404);
     }
 
 }
