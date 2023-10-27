@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\BadgeUnlocked;
 use App\Models\Badge;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class BadgeUnlockedListener
 {

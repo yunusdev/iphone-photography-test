@@ -5,8 +5,6 @@ namespace App\Listeners;
 use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
 use App\Models\Achievement;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class CommentWrittenListener
 {
