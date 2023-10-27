@@ -112,7 +112,7 @@ class LessonWatchedEventTest extends TestCase
     /**
      * Data provider for testing if AchievementUnlocked event is dispatched when lessons achievements are unlocked and also if the event is dispatched the number of required times
     */
-    public function lessonsData() : array {
+    public static function lessonsData() : array {
         return [
             ['First Lesson Watched', 1, 1],
             ['5 Lessons Watched', 5, 2],

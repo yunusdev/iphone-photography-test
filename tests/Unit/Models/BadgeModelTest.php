@@ -19,7 +19,7 @@ class BadgeModelTest extends TestCase
         $this->assertEquals($nextBadgeName,  $badge?->name);
     }
 
-    public function badgesData(): array {
+    public static function badgesData(): array {
         return [
             [0, 'Intermediate'],
             [2, 'Intermediate'],

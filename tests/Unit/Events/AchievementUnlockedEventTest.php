@@ -109,7 +109,7 @@ class AchievementUnlockedEventTest extends TestCase
         $this->assertEquals($achievementsCount, $user->achievementsCount());
     }
 
-    public function badgesCommentsArray() : array{
+    public static function badgesCommentsArray() : array {
 
         return [
             ['Intermediate', 10],
@@ -118,7 +118,7 @@ class AchievementUnlockedEventTest extends TestCase
         ];
     }
 
-    public function badgesLessonsArray() : array{
+    public static function badgesLessonsArray() : array{
 
         return [
             ['Intermediate', 25],
@@ -128,7 +128,7 @@ class AchievementUnlockedEventTest extends TestCase
     }
 
 
-    public function badgesArray() : array{
+    public static function badgesArray() : array{
 
         return [
             ['Intermediate', 0, 10, 2, 4],

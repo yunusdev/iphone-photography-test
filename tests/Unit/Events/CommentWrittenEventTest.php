@@ -101,7 +101,7 @@ class CommentWrittenEventTest extends TestCase
     /**
      * Data provider for testing if AchievementUnlocked event is dispatched when comments achievements are unlocked and also if the event is dispatched the number of required times
      */
-    public function commentsData() : array {
+    public static function commentsData() : array {
         return [
             ['First Comment Written', 1, 1],
             ['3 Comments Written', 3, 2],

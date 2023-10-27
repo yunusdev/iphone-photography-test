@@ -154,7 +154,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($nextAchievementName,  $achievement?->name);
     }
 
-    public function lessonsWatchedData(): array {
+    public static function lessonsWatchedData(): array {
         return [
             [1],
             [5],
@@ -164,7 +164,7 @@ class UserModelTest extends TestCase
         ];
     }
 
-    public function commentsWrittenData(): array {
+    public static function commentsWrittenData(): array {
         return [
             [1],
             [3],
@@ -174,7 +174,7 @@ class UserModelTest extends TestCase
         ];
     }
 
-    public function lessonsData(): array {
+    public static function lessonsData(): array {
         return [
             [0, null],
             [1, 'First Lesson Watched'],
@@ -185,7 +185,7 @@ class UserModelTest extends TestCase
         ];
     }
 
-    public function commentsData(): array {
+    public static function commentsData(): array {
         return [
             [0, null],
             [1, 'First Comment Written'],
@@ -199,7 +199,7 @@ class UserModelTest extends TestCase
     /**
      * This data is used to test unlockedUserAchievements, currentBadge and nextUserBadge functions
      */
-    public function userTestingData(): array {
+    public static function userTestingData(): array {
         return [
             [0, 0, [], 'Beginner', 'Intermediate'],
             [1, 0, ['First Lesson Watched'], 'Beginner', 'Intermediate'],
@@ -274,7 +274,7 @@ class UserModelTest extends TestCase
     /**
      * This data is used to test remainingAchievementsToUnlockNextBadge and nextAvailableAchievements functions
      */
-    public function userTestingData2(): array {
+    public static function userTestingData2(): array {
         return [
             [0, 0, 4, ['First Lesson Watched', 'First Comment Written']],
             [1, 0, 3, ['5 Lessons Watched', 'First Comment Written']],
@@ -289,7 +289,7 @@ class UserModelTest extends TestCase
         ];
     }
 
-    public function getNextAchievementLessonData(): array {
+    public static function getNextAchievementLessonData(): array {
         return [
             [null, 'First Lesson Watched'],
             ['First Lesson Watched', '5 Lessons Watched'],
@@ -300,7 +300,7 @@ class UserModelTest extends TestCase
         ];
     }
 
-    public function getNextAchievementCommentData(): array {
+    public static function getNextAchievementCommentData(): array {
         return [
             [null, 'First Comment Written'],
             ['First Lesson Watched', '3 Comments Written'],

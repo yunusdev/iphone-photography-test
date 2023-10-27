@@ -79,7 +79,7 @@ class BadgeUnlockedEventTest extends TestCase
     }
 
 
-    public function badgesArray() : array{
+    public static function badgesArray() : array{
 
         return [
             ['Intermediate', 0, 10],

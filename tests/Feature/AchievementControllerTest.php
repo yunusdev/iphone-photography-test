@@ -35,7 +35,7 @@ class AchievementControllerTest extends TestCase
             ->assertJson($jsonResult);
     }
 
-    public function data() : array {
+    public static function data() : array {
 
         return [
             [

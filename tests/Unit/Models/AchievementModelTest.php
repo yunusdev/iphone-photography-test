@@ -68,7 +68,7 @@ class AchievementModelTest extends TestCase
         $this->assertEquals($nextAchievementName,  $achievement?->name);
     }
 
-    public function lessonsData() : array {
+    public static function lessonsData() : array {
         return [
             ['First Lesson Watched', 1],
             ['5 Lessons Watched', 5],
@@ -78,7 +78,7 @@ class AchievementModelTest extends TestCase
         ];
     }
 
-    public function commentsData() : array {
+    public static function commentsData() : array {
         return [
             ['First Comment Written', 1],
             ['3 Comments Written', 3],
@@ -88,7 +88,7 @@ class AchievementModelTest extends TestCase
         ];
     }
 
-    public function getNextAchievementLessonData(): array {
+    public static function getNextAchievementLessonData(): array {
         return [
             [0, 'First Lesson Watched'],
             [1, '5 Lessons Watched'],
@@ -104,7 +104,7 @@ class AchievementModelTest extends TestCase
         ];
     }
 
-    public function getNextAchievementCommentData(): array {
+    public static function getNextAchievementCommentData(): array {
         return [
             [0, 'First Comment Written'],
             [1, '3 Comments Written'],
