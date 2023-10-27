@@ -2,11 +2,7 @@
 
 namespace Tests\Unit\Models;
 
-use App\Events\AchievementUnlocked;
-use App\Listeners\AchievementUnlockedListener;
 use App\Models\Achievement;
-use App\Models\User;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class AchievementModelTest extends TestCase

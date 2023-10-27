@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Models;
 
-use App\Models\Achievement;
 use App\Models\Badge;
 use Tests\TestCase;
 
